@@ -10,6 +10,58 @@ body {
   color: white;
 }
 
-.app-title__superscript {
+.wrapper {
+  max-width: 25em;
+  padding: 2em;
+  margin: auto;
+}
+
+.heading__superscript {
   font-size: 1rem;
+}
+
+.form {
+  margin-top: 2em;
+}
+
+.form * {
+  display: block;
+}
+
+/* Input Couplings (label + input) */
+
+.input-coupling {
+  position: relative;
+  margin-bottom: 2.5em;
+}
+
+.input-coupling__input {
+  font-size: 1em;
+  width: 100%;
+  padding: 0.75em;
+  border-radius: 0.33em;
+  background-color: #222;
+  color: white;
+  border: none;
+}
+
+.input-coupling__label {
+  position: absolute;
+  top: 2em;
+  opacity: 0;
+}
+
+.input-coupling--mutated .input-coupling__label {
+  top: 3em;
+  opacity: 0.66;
+  transition: opacity 0.1s ease-in, top 0.1s ease-in-out;
+}
+
+/* ... */
+
+.mpg-output {
+  display: inline-block;
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-top: 1em;
 }

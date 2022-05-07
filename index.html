@@ -3,12 +3,74 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MPG Calculator</title>
+    <title>MPG Calculator (UK)</title>
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <h1 class="app-title">
-      MPG Calculator <sup class="app-title__superscript">UK</sup>
-    </h1>
+    <div class="wrapper">
+      <h1 class="heading">MPG Calculator <sup class="heading__superscript">UK</sup></h1>
+
+      <!-- Form -->
+      <form class="form">
+        <!-- Miles input -->
+        <div class="input-coupling input-coupling--miles">
+          <input
+            type="number"
+            name="miles"
+            placeholder="Miles"
+            step="0.01"
+            class="input-coupling__input input-coupling__input--miles"
+          />
+          <label for="miles" class="input-coupling__label input-coupling__label--miles">
+            Miles
+          </label>
+        </div>
+
+        <!-- Litres input -->
+        <div class="input-coupling input-coupling--litres">
+          <input
+            type="number"
+            name="litres"
+            placeholder="Litres"
+            step="0.01"
+            class="input-coupling__input input-coupling__input--litres"
+          />
+          <label for="litres" class="input-coupling__label input-coupling__label--litres">
+            Litres
+          </label>
+        </div>
+      </form>
+
+      <!-- MPG output -->
+      <p class="mpg-output"></p>
+    </div>
+
+    <script>
+      const UK_GALLON_LITRES = 4.546;
+      const data = {
+        miles: null,
+        litres: null,
+      };
+
+      const form = document.querySelector('.form');
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+      });
+
+      const inputs = document.querySelectorAll('.input-coupling__input');
+      const output = document.querySelector('.mpg-output');
+      inputs.forEach((input) => {
+        input.addEventListener('input', (e) => {
+          // Toggle label
+          if (input.value.length > 0) {
+            input.parentElement.classList.add('input-coupling--mutated');
+            data[input.getAttribute('name')] = Number(input.value);
+            output.innerHTML = `${(data.miles / (data.litres / UK_GALLON_LITRES)).toFixed(2)}mpg`;
+          } else {
+            input.parentElement.classList.remove('input-coupling--mutated');
+          }
+        });
+      });
+    </script>
   </body>
 </html>
