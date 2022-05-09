@@ -11,34 +11,17 @@
       <h1 class="heading">MPG Calculator <sup class="heading__superscript">UK</sup></h1>
 
       <!-- Form -->
+      <!-- NOTE: not using type="number" for inputs due to accessibility concerns (UK GDS) -->
       <form class="form">
         <!-- Miles input + label -->
         <div class="input-coupling input-coupling--miles">
-          <input
-            type="number"
-            name="miles"
-            placeholder="Miles"
-            min="0"
-            step="0.01"
-            class="input-coupling__input input-coupling__input--miles"
-          />
-          <label for="miles" class="input-coupling__label input-coupling__label--miles">
-            Miles
-          </label>
+          <label for="miles" class="input-coupling__label"> Miles </label>
+          <input type="text" name="miles" placeholder="Miles" class="input-coupling__input" />
         </div>
         <!-- Litres input + label -->
         <div class="input-coupling input-coupling--litres">
-          <input
-            type="number"
-            name="litres"
-            placeholder="Litres"
-            min="0"
-            step="0.01"
-            class="input-coupling__input input-coupling__input--litres"
-          />
-          <label for="litres" class="input-coupling__label input-coupling__label--litres">
-            Litres
-          </label>
+          <label for="litres" class="input-coupling__label"> Litres </label>
+          <input type="text" name="litres" placeholder="Litres" class="input-coupling__input" />
         </div>
       </form>
 
@@ -64,7 +47,7 @@
       inputs.forEach((input) => {
         input.addEventListener('input', (e) => {
           // Update data object and output element
-          data[input.getAttribute('name')] = Number(input.value);
+          data[input.getAttribute('name')] = input.value;
           output.innerHTML = renderMPGString(data.miles, data.litres);
           // Determine each input's mutated state (set on parent)
           if (input.value.length > 0) input.parentElement.classList.add('input-coupling--mutated');
@@ -73,8 +56,8 @@
       });
 
       function renderMPGString(miles, litres, dp = 2) {
-        if (!miles || !litres) return '';
-        else return `${(miles / (litres / UK_GALLON_LITRES)).toFixed(dp)}mpg`;
+        if (!miles || !litres || isNaN(miles) || isNaN(litres)) return '--';
+        return `${(miles / (litres / UK_GALLON_LITRES)).toFixed(dp)}mpg`;
       }
     </script>
   </body>
