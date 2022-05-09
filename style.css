@@ -28,40 +28,44 @@ body {
   display: block;
 }
 
-/* Input Couplings (label + input) */
+/* Input Couplings (input + label) */
 
 .input-coupling {
+  margin-top: 1em;
   position: relative;
-  margin-bottom: 2.5em;
+  display: flex;
+  align-items: center;
 }
 
 .input-coupling__input {
+  flex: 3;
   font-size: 1em;
   width: 100%;
   padding: 0.75em;
+  border: none;
   border-radius: 0.33em;
   background-color: #222;
   color: white;
-  border: none;
 }
 
 .input-coupling__label {
-  position: absolute;
-  top: 2em;
+  flex: 1;
+  margin-left: 0.75em;
   opacity: 0;
+  transform: translateX(-1em);
 }
 
 .input-coupling--mutated .input-coupling__label {
-  top: 3em;
   opacity: 0.66;
-  transition: opacity 0.1s ease-in, top 0.1s ease-in-out;
+  transform: translateX(0);
+  transition: opacity 0.1s ease-in, transform 0.2s ease-in-out;
 }
 
 /* ... */
 
 .mpg-output {
-  display: inline-block;
   font-size: 1.5em;
+  display: inline-block;
+  margin-top: 2em;
   font-weight: bold;
-  margin-top: 1em;
 }
