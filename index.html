@@ -54,30 +54,28 @@
         litres: null,
       };
 
-      const form = document.querySelector('.form');
-      form.addEventListener('submit', (e) => {
+      // Prevent form submission
+      document.querySelector('.form').addEventListener('submit', (e) => {
         e.preventDefault();
       });
 
+      // Manage inputs and output upon user input
       const inputs = document.querySelectorAll('.input-coupling__input');
       const output = document.querySelector('.mpg-output');
       inputs.forEach((input) => {
         input.addEventListener('input', (e) => {
-          // Update data and output
+          // Update data object and output element
           data[input.getAttribute('name')] = Number(input.value);
-          output.innerHTML = renderOutputText();
-          // Check if each input's label should be visible
-          if (input.value.length > 0) {
-            input.parentElement.classList.add('input-coupling--mutated');
-          } else {
-            input.parentElement.classList.remove('input-coupling--mutated');
-          }
+          output.innerHTML = renderMPGString(data.miles, data.litres);
+          // Determine each input's mutated state (set on parent)
+          if (input.value.length > 0) input.parentElement.classList.add('input-coupling--mutated');
+          else input.parentElement.classList.remove('input-coupling--mutated');
         });
       });
 
-      function renderOutputText() {
-        if (!data.miles || !data.litres) return '';
-        else return `${(data.miles / (data.litres / UK_GALLON_LITRES)).toFixed(2)}mpg`;
+      function renderMPGString(miles, litres, dp = 2) {
+        if (!miles || !litres) return '';
+        else return `${(miles / (litres / UK_GALLON_LITRES)).toFixed(dp)}mpg`;
       }
     </script>
   </body>
