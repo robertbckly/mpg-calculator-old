@@ -36,6 +36,7 @@ body {
 .input-coupling__input {
   flex: 3;
   font-size: 1em;
+  min-width: 0; /* Fix input not respecting flex property */
   padding: 0.75em;
   border: none;
   border-radius: 0.33em;
