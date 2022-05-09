@@ -17,15 +17,11 @@ body {
 }
 
 .heading__superscript {
-  font-size: 1rem;
+  font-size: 0.5em;
 }
 
 .form {
   margin-top: 2em;
-}
-
-.form * {
-  display: block;
 }
 
 /* Input Couplings (input + label) */
@@ -40,11 +36,10 @@ body {
 .input-coupling__input {
   flex: 3;
   font-size: 1em;
-  width: 100%;
   padding: 0.75em;
   border: none;
   border-radius: 0.33em;
-  background-color: #222;
+  background-color: #252525;
   color: white;
 }
 
@@ -53,15 +48,15 @@ body {
   margin-left: 0.75em;
   opacity: 0;
   transform: translateX(-1em);
+  transition: opacity 0.2s ease-in, transform 0.2s ease-in;
 }
 
 .input-coupling--mutated .input-coupling__label {
   opacity: 0.66;
   transform: translateX(0);
-  transition: opacity 0.1s ease-in, transform 0.2s ease-in-out;
 }
 
-/* ... */
+/* MPG Output */
 
 .mpg-output {
   font-size: 1.5em;
