@@ -18,6 +18,7 @@
             type="number"
             name="miles"
             placeholder="Miles"
+            min="0"
             step="0.01"
             class="input-coupling__input input-coupling__input--miles"
           />
@@ -32,6 +33,7 @@
             type="number"
             name="litres"
             placeholder="Litres"
+            min="0"
             step="0.01"
             class="input-coupling__input input-coupling__input--litres"
           />
@@ -61,16 +63,22 @@
       const output = document.querySelector('.mpg-output');
       inputs.forEach((input) => {
         input.addEventListener('input', (e) => {
-          // Toggle label
+          // Update data and output
+          data[input.getAttribute('name')] = Number(input.value);
+          output.innerHTML = renderOutputText();
+          // Check if each input's label should be visible
           if (input.value.length > 0) {
             input.parentElement.classList.add('input-coupling--mutated');
-            data[input.getAttribute('name')] = Number(input.value);
-            output.innerHTML = `${(data.miles / (data.litres / UK_GALLON_LITRES)).toFixed(2)}mpg`;
           } else {
             input.parentElement.classList.remove('input-coupling--mutated');
           }
         });
       });
+
+      function renderOutputText() {
+        if (!data.miles || !data.litres) return '';
+        else return `${(data.miles / (data.litres / UK_GALLON_LITRES)).toFixed(2)}mpg`;
+      }
     </script>
   </body>
 </html>
